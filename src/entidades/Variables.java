@@ -3,7 +3,7 @@ package entidades;
 public class Variables {
     private int numero = 0;
     private String hormiga;
-    private hormigasDentro[];
+    private ListaHormigas hormigasDentro;
     
     int getNumero(){
         return numero;
