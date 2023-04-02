@@ -3,9 +3,11 @@ package entidades;
 public class HormigaSoldado extends Thread{
     private int idNumero = 0;
     private String idStr;
+    Colonia colonia;
     
-    public HormigaSoldado(int id){
+    public HormigaSoldado(int id, Colonia colonia){
         this.idNumero = id;
+        this.colonia = colonia;
     }
     
     public void calculoID(){
