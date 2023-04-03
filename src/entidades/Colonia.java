@@ -55,7 +55,7 @@ public class Colonia {
     
     public void entrar(String idStr){
         try{
-            entrarColonia.acquire();
+            entrarColonia.acquire();  // pongo semaforo
             hormigasFuera.sacar(idStr);
             hormigasDentro.meter(idStr);
             
@@ -63,13 +63,14 @@ public class Colonia {
             Logger.getLogger(Colonia.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            entrarColonia.release();
+            entrarColonia.release();  // quito semaforo
         }
         
     }
     
-    public void salir(){
+    public void salir(String idStr){
         // TODO
+        // sacar de la lista hormigasFuera y meter en 
     }
     
     public void almacen(int minimo, int maximo, String id, boolean annadirComida){
@@ -136,13 +137,19 @@ public class Colonia {
         hormigasRefugio.sacar(id);
     }
     
-    public void zonaComer(int minimo, int maximo, String id){
+    public void zonaComer(int minimo, int maximo, String id, boolean annadirComida){
         hormigasComer.meter(id);
         
         try{
             cerrojoComidaZonaComer.lock();
+            
+            if(annadirComida){
+                numeroComidaZonaComer++;
+            }
+            else{
+                numeroComidaZonaComer--;
+            }
 
-            numeroComidaZonaComer--;
         }
         finally{
             cerrojoComidaZonaComer.unlock();
