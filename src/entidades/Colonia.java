@@ -70,7 +70,22 @@ public class Colonia {
     
     public void salir(String idStr){
         // TODO
-        // sacar de la lista hormigasFuera y meter en 
+        // sacar de la lista hormigasFuera y meter en
+        while(true){
+            if(salirColonia1.tryAcquire()){
+                hormigasDentro.sacar(idStr);
+                hormigasFuera.meter(idStr);
+                salirColonia1.release();
+                break;
+            }
+            if(salirColonia2.tryAcquire()){
+                hormigasDentro.sacar(idStr);
+                hormigasFuera.meter(idStr);
+                salirColonia2.release();
+                break;
+            }
+        }
+        
     }
     
     public void almacen(int minimo, int maximo, String id, boolean annadirComida){

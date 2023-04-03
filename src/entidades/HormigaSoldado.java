@@ -8,6 +8,7 @@ public class HormigaSoldado extends Thread{
     public HormigaSoldado(int id, Colonia colonia){
         this.idNumero = id;
         this.colonia = colonia;
+        calculoID();
     }
     
     public void calculoID(){
@@ -30,8 +31,21 @@ public class HormigaSoldado extends Thread{
     }
     
     public void run(){
-        calculoID();
+        //calculoID();
         
-        System.out.println(idStr);
+        int i = 0;
+        
+        while(true){
+            if(i % 6 == 0){
+                // cada 6 iteracciones
+                colonia.zonaComer(0, 3, idStr, false);
+            }
+            else{
+                colonia.instruccion(2, 8, idStr);
+                colonia.descanso(2, idStr);
+            }
+            i++;
+        }
+        
     }
 }

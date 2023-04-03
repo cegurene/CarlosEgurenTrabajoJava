@@ -3,9 +3,12 @@ package entidades;
 public class HormigaCria extends Thread{
     private int idNumero = 0;
     private String idStr;
+    private Colonia colonia;
     
-    public HormigaCria(int id){
+    public HormigaCria(int id, Colonia colonia){
         this.idNumero = id;
+        this.colonia = colonia;
+        calculoID();
     }
     
     public void calculoID(){
@@ -28,8 +31,11 @@ public class HormigaCria extends Thread{
     }
     
     public void run(){
-        calculoID();
+        //calculoID();
         
-        System.out.println(idStr);
+        while(true){
+            colonia.zonaComer(3, 5, idStr, true);
+            colonia.descanso(4, idStr);
+        }
     }
 }
