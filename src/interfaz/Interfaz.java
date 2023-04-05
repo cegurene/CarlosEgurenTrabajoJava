@@ -33,7 +33,7 @@ public class Interfaz extends javax.swing.JFrame {
     int k;
     
     private void crearHormigas() throws InterruptedException{
-        /*
+        
         if(i % j == 3){  // comprobamos si se ha parado el programa antes de completar la iteraccion
             HormigaSoldado hs = new HormigaSoldado(j, colonia, paso);
             hs.start();
@@ -57,8 +57,8 @@ public class Interfaz extends javax.swing.JFrame {
 
             sleep((long) (Math.random() * 2700 + 800));
         }
-        */
-        while(this.i <= 60){
+        
+        while(this.i <= 6000){
             HormigaObrera ho = new HormigaObrera(i, colonia, paso);
             ho.start();
             i++;
