@@ -16,6 +16,8 @@ public class Colonia {
     private ListaHormigas hormigasDescanso;
     private ListaHormigas hormigasRefugio;
     private ListaHormigas hormigasComer;
+    private ListaHormigas hormigasInsecto;
+    private ListaHormigas hormigasBuscando;
     
     private Semaphore entrarColonia = new Semaphore(1, true);
     private Semaphore salirColonia1 = new Semaphore(1, true);
@@ -28,9 +30,18 @@ public class Colonia {
     private int numeroComidaAlmacen;
     private int numeroComidaZonaComer;
     
-    public Colonia(){
+    public Colonia(ListaHormigas exterior, ListaHormigas interior, ListaHormigas refugio, ListaHormigas zonaComer, ListaHormigas zonaDescanso, ListaHormigas instruccion, ListaHormigas almacen, ListaHormigas insecto, ListaHormigas buscando){
         numeroComidaAlmacen = 0;
         numeroComidaZonaComer = 0;
+        this.hormigasRefugio = refugio;
+        this.hormigasComer = zonaComer;
+        this.hormigasDescanso = zonaDescanso;
+        this.hormigasInsecto = insecto;
+        this.hormigasInstruccion = instruccion;
+        this.hormigasAlmacen = almacen;
+        this.hormigasBuscando = buscando;
+        this.hormigasFuera = exterior;
+        this.hormigasDentro = interior;
     }
     
     public int getComidaZonaComer(){
@@ -69,8 +80,6 @@ public class Colonia {
     }
     
     public void salir(String idStr){
-        // TODO
-        // sacar de la lista hormigasFuera y meter en
         while(true){
             if(salirColonia1.tryAcquire()){
                 hormigasDentro.sacar(idStr);
