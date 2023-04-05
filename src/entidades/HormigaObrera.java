@@ -8,11 +8,13 @@ public class HormigaObrera extends Thread{
     private String idStr;
     private Colonia colonia;
     boolean par;
+    private Paso paso;
     
-    public HormigaObrera(int id, Colonia colonia){
+    public HormigaObrera(int id, Colonia colonia, Paso paso){
         this.idNumero = id;
         this.colonia = colonia;
         this.par =  (id % 2 == 0);
+        this.paso = paso;
         calculoID();
     }
     
@@ -43,7 +45,9 @@ public class HormigaObrera extends Thread{
             if(i % 10 == 0){
                 // cada 10 iteracciones
                 colonia.zonaComer(0, 3, idStr, false);
+                paso.mirar();
                 colonia.descanso(1, idStr);
+                paso.mirar();
             }
             else{
                 
@@ -55,8 +59,10 @@ public class HormigaObrera extends Thread{
                     } catch (InterruptedException ex) {
                         Logger.getLogger(HormigaObrera.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    paso.mirar();
 
                     colonia.zonaComer(1, 2, idStr, true);
+                    paso.mirar();
                 }
                 else{
                     colonia.salir(idStr);
@@ -66,9 +72,12 @@ public class HormigaObrera extends Thread{
                     } catch (InterruptedException ex) {
                         Logger.getLogger(HormigaObrera.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    paso.mirar();
 
                     colonia.entrar(idStr);
+                    paso.mirar();
                     colonia.almacen(2, 4, idStr, true);
+                    paso.mirar();
                 }
                 
             }

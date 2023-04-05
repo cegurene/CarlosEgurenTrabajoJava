@@ -4,10 +4,12 @@ public class HormigaSoldado extends Thread{
     private int idNumero = 0;
     private String idStr;
     Colonia colonia;
+    private Paso paso;
     
-    public HormigaSoldado(int id, Colonia colonia){
+    public HormigaSoldado(int id, Colonia colonia, Paso paso){
         this.idNumero = id;
         this.colonia = colonia;
+        this.paso = paso;
         calculoID();
     }
     
@@ -39,10 +41,13 @@ public class HormigaSoldado extends Thread{
             if(i % 6 == 0){
                 // cada 6 iteracciones
                 colonia.zonaComer(0, 3, idStr, false);
+                paso.mirar();
             }
             else{
                 colonia.instruccion(2, 8, idStr);
+                paso.mirar();
                 colonia.descanso(2, idStr);
+                paso.mirar();
             }
             i++;
         }

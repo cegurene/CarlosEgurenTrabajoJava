@@ -1,8 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package interfaz;
+
+import entidades.Colonia;
+import entidades.HormigaCria;
+import entidades.HormigaObrera;
+import entidades.HormigaSoldado;
+import entidades.Paso;
+import static java.lang.Thread.sleep;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -10,11 +15,91 @@ package interfaz;
  */
 public class Interfaz extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Interfaz
-     */
+    private Paso paso = new Paso();
+    private boolean pausado;
+    Colonia colonia = new Colonia();
+    int i;
+    int j;
+    int k;
+    
+    private void crearHormigas() throws InterruptedException{
+        
+        if(i % j == 3){  // comprobamos si se ha parado el programa antes de completar la iteraccion
+            HormigaSoldado hs = new HormigaSoldado(j, colonia, paso);
+            hs.start();
+            j++;
+            
+            if(pausado){
+                return;
+            }
+            
+            sleep((long) (Math.random() * 2700 + 800));
+        }
+                
+        if(j != k){
+            HormigaCria hc = new HormigaCria(k, colonia, paso);
+            hc.start();
+            k++;
+            
+            if(pausado){
+                return;
+            }
+
+            sleep((long) (Math.random() * 2700 + 800));
+        }
+        
+        while(this.i <= 6000){
+            HormigaObrera ho = new HormigaObrera(i, colonia, paso);
+            ho.start();
+            i++;
+            
+            if(pausado){
+                return;
+            }
+            
+            sleep((long) (Math.random() * 2700 + 800));
+            
+            if(i % 3 == 0){
+                HormigaSoldado hs = new HormigaSoldado(j, colonia, paso);
+                hs.start();
+                j++;
+                
+                if(pausado){
+                    return;
+                }
+                
+                sleep((long) (Math.random() * 2700 + 800));
+                
+                HormigaCria hc = new HormigaCria(k, colonia, paso);
+                hc.start();
+                k++;
+                
+                if(pausado){
+                    return;
+                }
+                
+                sleep((long) (Math.random() * 2700 + 800));
+                
+            }
+            if(pausado){
+                return;
+            }
+        }
+                
+    }
+    
     public Interfaz() {
         initComponents();
+        i = 1;
+        j = 1;
+        k = 1;
+        
+        try {
+            crearHormigas();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -94,8 +179,18 @@ public class Interfaz extends javax.swing.JFrame {
         botonInsecto.setText("Generar Insecto Invasor");
 
         botonPausa.setText("Pausar");
+        botonPausa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPausaActionPerformed(evt);
+            }
+        });
 
         botonReanudar.setText("Reanudar");
+        botonReanudar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReanudarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,6 +295,26 @@ public class Interfaz extends javax.swing.JFrame {
     private void textoHormigasInsectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoHormigasInsectoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textoHormigasInsectoActionPerformed
+
+    private void botonPausaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPausaActionPerformed
+        if(!pausado){  // si no se ha pulsado el boton de pausa
+            pausado = true;
+            paso.cerrar();  // paramos el programa
+        }
+    }//GEN-LAST:event_botonPausaActionPerformed
+
+    private void botonReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReanudarActionPerformed
+        if(pausado){
+            pausado = false;
+            paso.abrir();  // abrimos para que continue el programa
+            
+            try {
+                crearHormigas();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_botonReanudarActionPerformed
 
     /**
      * @param args the command line arguments
