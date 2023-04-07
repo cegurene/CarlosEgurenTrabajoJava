@@ -66,12 +66,9 @@ public class HormigaObrera extends Thread{
                 }
                 else{
                     colonia.salir(idStr);
+                    
+                    colonia.buscarComida(idStr);
 
-                    try {
-                        sleep(4000);  // tarda 4s en coger comida de fuera
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(HormigaObrera.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                     paso.mirar();
 
                     colonia.entrar(idStr);
