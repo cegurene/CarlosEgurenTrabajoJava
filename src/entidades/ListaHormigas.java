@@ -3,7 +3,7 @@ package entidades;
 import java.util.*;
 import javax.swing.JTextField;
 
-/* La clase ListaThreads permite gestionar las listas de threads en los monitores,
+/* La clase ListaHormigas permite gestionar las listas de threads en los monitores,
 con métodos para meter y sacar threads en ella. Cada vez que una lista se modifica,
 se imprime su nuevo contenido en el JTextField que toma como parámetro el constructor. */
 

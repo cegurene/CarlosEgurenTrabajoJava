@@ -37,6 +37,7 @@ public class FileManager {
                 // Nuevamente aprovechamos el finally para 
                 // asegurarnos que se cierra el fichero.
                 if(null != fichero){
+                    pw.close();
                     fichero.close();
                 }
             }catch(Exception e2) {

@@ -6,6 +6,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
 
 public class Colonia {
     
@@ -25,12 +26,14 @@ public class Colonia {
     private Lock cerrojoComidaAlmacen = new ReentrantLock();
     private Lock cerrojoComidaZonaComer = new ReentrantLock();
     
-    private int numeroComidaAlmacen;
-    private int numeroComidaZonaComer;
+    private int numeroComidaAlmacen = 0;
+    private int numeroComidaZonaComer = 0;
+    private JTextField nComidaAlmacen;
+    private JTextField nComidaZonaComer;
     
     private Paso paso;
     
-    public Colonia(ListaHormigas refugio, ListaHormigas zonaComer, ListaHormigas zonaDescanso, ListaHormigas instruccion, ListaHormigas almacen, ListaHormigas insecto, ListaHormigas buscando, Paso paso){
+    public Colonia(ListaHormigas refugio, ListaHormigas zonaComer, ListaHormigas zonaDescanso, ListaHormigas instruccion, ListaHormigas almacen, ListaHormigas insecto, ListaHormigas buscando, Paso paso, JTextField nComidaAlmacen, JTextField nComidaZonaComer){
         numeroComidaAlmacen = 0;
         numeroComidaZonaComer = 0;
         this.hormigasRefugio = refugio;
@@ -41,26 +44,18 @@ public class Colonia {
         this.hormigasAlmacen = almacen;
         this.hormigasBuscando = buscando;
         this.paso = paso;
+        this.nComidaAlmacen = nComidaAlmacen;
+        this.nComidaZonaComer = nComidaZonaComer;
     }
     
-    public int getComidaZonaComer(){
-        try{
-            cerrojoComidaZonaComer.lock();
-        }
-        finally{
-            cerrojoComidaZonaComer.unlock();
-            return numeroComidaZonaComer;
-        }
+    public void actualizarComidaAlmacen(){
+        paso.mirar();
+        nComidaAlmacen.setText(String.valueOf(numeroComidaAlmacen));
     }
     
-    public void setComidaZonaComer(int numero){
-        try{
-            cerrojoComidaZonaComer.lock();
-            numeroComidaZonaComer = numero;
-        }
-        finally{
-            cerrojoComidaZonaComer.unlock();
-        }
+    public void actualizarComidaZonaComida(){
+        paso.mirar();
+        nComidaZonaComer.setText(String.valueOf(numeroComidaZonaComer));     
     }
     
     public void entrar(String idStr){
@@ -129,9 +124,20 @@ public class Colonia {
             FileManager.guardarDatos(texto, id);
             paso.mirar();
             
-            try{
-                cerrojoComidaAlmacen.lock();
-                
+            cerrojoComidaAlmacen.lock();
+            if(!annadirComida && numeroComidaAlmacen == 0){  // si va a sacar comida y no hay
+                cerrojoComidaAlmacen.unlock();
+                paso.mirar();
+                hormigasAlmacen.sacar(id);
+                String msg = " no puede sacar comida del almacen porque esta vacio.";
+                paso.mirar();
+                FileManager.guardarDatos(msg, id);
+                paso.mirar();
+                almacenComida.release();
+                return;  // salimos del metodo
+            }
+            
+            try{                
                 if(annadirComida){
                     paso.mirar();
                     numeroComidaAlmacen++;  // annadimos comida
@@ -140,6 +146,7 @@ public class Colonia {
                     paso.mirar();
                     numeroComidaAlmacen--;  // quitamos comida
                 }
+                actualizarComidaAlmacen();
             }
             finally{
                 cerrojoComidaAlmacen.unlock();
@@ -221,9 +228,18 @@ public class Colonia {
         FileManager.guardarDatos(texto, id);
         paso.mirar();
         
-        try{
-            cerrojoComidaZonaComer.lock();
-            
+        cerrojoComidaZonaComer.lock();
+        if(!annadirComida && numeroComidaZonaComer == 0){  // si va a consumir comida y no hay
+            cerrojoComidaZonaComer.unlock();
+            paso.mirar();
+            hormigasComer.sacar(id);
+            String msg = " no puede comer porque no hay comida disponible.";
+            paso.mirar();
+            FileManager.guardarDatos(msg, id);
+            return;  // salimos del metodo
+        }
+       
+        try{            
             if(annadirComida){
                 paso.mirar();
                 numeroComidaZonaComer++;
@@ -232,7 +248,7 @@ public class Colonia {
                 paso.mirar();
                 numeroComidaZonaComer--;
             }
-
+            actualizarComidaZonaComida();
         }
         finally{
             cerrojoComidaZonaComer.unlock();
