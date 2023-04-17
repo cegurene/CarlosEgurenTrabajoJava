@@ -22,11 +22,12 @@ public class FileManager {
         
         FileWriter fichero = null;
         PrintWriter pw = null;
+        cerrojo.lock();
         try{
             fichero = new FileWriter(path + nombreFichero, true);
             pw = new PrintWriter(fichero);
 
-            pw.println("La hormiga" + tipoHormiga(idStr) + idStr + texto);
+            pw.println(formatearFechaHora(new Date()) + "La hormiga" + tipoHormiga(idStr) + idStr + texto);
 
         }
         catch(Exception e){
@@ -43,6 +44,9 @@ public class FileManager {
             }catch(Exception e2) {
                 e2.printStackTrace();
            }
+            finally{
+                cerrojo.unlock();
+            }
         }
     }
     

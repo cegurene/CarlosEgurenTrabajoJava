@@ -1,10 +1,19 @@
 package entidades;
  
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class HormigaSoldado extends Thread{
     private int idNumero = 0;
     private String idStr;
-    Colonia colonia;
+    private Colonia colonia;
     private Paso paso;
+    private CyclicBarrier barreraAmenaza1;
     
     public HormigaSoldado(int id, Colonia colonia, Paso paso){
         this.idNumero = id;
@@ -29,6 +38,14 @@ public class HormigaSoldado extends Thread{
                     idStr = "HS" + String.valueOf(idNumero);
                 }
             }
+        }
+    }
+    
+    public void comprobarAmenaza(){
+        if(colonia.getAmenaza()){
+            colonia.salir(idStr);
+            colonia.lucharAmenaza(idStr);
+            colonia.entrar(idStr);
         }
     }
     

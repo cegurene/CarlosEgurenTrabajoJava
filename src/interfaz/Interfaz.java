@@ -7,6 +7,7 @@ import entidades.HormigaSoldado;
 import entidades.ListaHormigas;
 import entidades.Paso;
 import static java.lang.Thread.sleep;
+import java.util.concurrent.CyclicBarrier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,17 +27,18 @@ public class Interfaz extends javax.swing.JFrame {
     private ListaHormigas hormigasComer;
     private ListaHormigas hormigasInsecto;
     private ListaHormigas hormigasBuscando;
-    Colonia colonia;
-    int i;
-    int j;
-    int k;
-    /*
+    private Colonia colonia;
+    
+    int numeroHSoldado;
+    int numeroHCria;
+    int numeroHObrera;
+    
     private void crearHormigas() throws InterruptedException{
         
-        if(i % j == 3){  // comprobamos si se ha parado el programa antes de completar la iteraccion
-            HormigaSoldado hs = new HormigaSoldado(j, colonia, paso);
+        if(numeroHObrera % numeroHSoldado == 3){  // comprobamos si se ha parado el programa antes de completar la iteraccion
+            HormigaSoldado hs = new HormigaSoldado(numeroHSoldado, colonia, paso);
             hs.start();
-            j++;
+            numeroHSoldado++;
             
             if(pausado){
                 return;
@@ -45,10 +47,10 @@ public class Interfaz extends javax.swing.JFrame {
             sleep((long) (Math.random() * 2700 + 800));
         }
                 
-        if(j != k){
-            HormigaCria hc = new HormigaCria(k, colonia, paso);
+        if(numeroHSoldado != numeroHCria){
+            HormigaCria hc = new HormigaCria(numeroHCria, colonia, paso);
             hc.start();
-            k++;
+            numeroHCria++;
             
             if(pausado){
                 return;
@@ -57,10 +59,10 @@ public class Interfaz extends javax.swing.JFrame {
             sleep((long) (Math.random() * 2700 + 800));
         }
         
-        while(i <= 6000){
-            HormigaObrera ho = new HormigaObrera(i, colonia, paso);
+        while(numeroHObrera <= 6000){
+            HormigaObrera ho = new HormigaObrera(numeroHObrera, colonia, paso);
             ho.start();
-            i++;
+            numeroHObrera++;
             
             if(pausado){
                 return;
@@ -68,10 +70,10 @@ public class Interfaz extends javax.swing.JFrame {
             
             sleep((long) (Math.random() * 2700 + 800));
             
-            if(i % 3 == 0){
-                HormigaSoldado hs = new HormigaSoldado(j, colonia, paso);
+            if(numeroHObrera % 3 == 0){
+                HormigaSoldado hs = new HormigaSoldado(numeroHSoldado, colonia, paso);
                 hs.start();
-                j++;
+                numeroHSoldado++;
                 
                 if(pausado){
                     return;
@@ -79,9 +81,9 @@ public class Interfaz extends javax.swing.JFrame {
                 
                 sleep((long) (Math.random() * 2700 + 800));
                 
-                HormigaCria hc = new HormigaCria(k, colonia, paso);
+                HormigaCria hc = new HormigaCria(numeroHCria, colonia, paso);
                 hc.start();
-                k++;
+                numeroHCria++;
                 
                 if(pausado){
                     return;
@@ -96,7 +98,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
                 
     }
-    */
+    
     public Interfaz() {
         initComponents();
         textoComidaAlmacen.setText("0");
@@ -112,12 +114,11 @@ public class Interfaz extends javax.swing.JFrame {
                 
         colonia = new Colonia(hormigasRefugio, hormigasComer, hormigasDescanso, hormigasInstruccion, hormigasAlmacen, hormigasInsecto, hormigasBuscando, paso, textoComidaAlmacen, textoComidaZonaComer);
         
-        i = 1;
-        j = 1;
-        k = 1;
-        
-        //crearHormigas();            
-        
+        numeroHSoldado = 1;
+        numeroHCria = 1;
+        numeroHObrera = 1;
+         
+        /*
         for(int x = 1; x < 11; x++){
             HormigaSoldado hs = new HormigaSoldado(x, colonia, paso);
             HormigaCria hc = new HormigaCria(x, colonia, paso);
@@ -125,7 +126,19 @@ public class Interfaz extends javax.swing.JFrame {
             hs.start();
             hc.start();
             ho.start();
+        }*/
+                
+        // creacion de hilos
+        new Thread(new Runnable(){
+            @Override
+            public void run(){
+                try {
+                    crearHormigas();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        }).start();
         
     }
 
@@ -236,44 +249,60 @@ public class Interfaz extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel0, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel10)
-                                .addGap(18, 18, 18)
-                                .addComponent(textoComidaZonaComer, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(textoRefugio)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(textoComidaAlmacen, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel8)
-                            .addComponent(textoAlmacen)
-                            .addComponent(textoInstruccion)
-                            .addComponent(textoDescanso)
-                            .addComponent(textoZonaComer)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addComponent(textoHormigasComida, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(textoHormigasInsecto, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botonPausa, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(botonReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonInsecto)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(botonInsecto))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textoRefugio, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textoZonaComer, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel0)
+                        .addComponent(jLabel3)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(47, 47, 47)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel10)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(textoComidaZonaComer, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(245, 245, 245)
+                                    .addComponent(jLabel9)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(textoComidaAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                                .addComponent(textoAlmacen)
+                                .addComponent(textoInstruccion)
+                                .addComponent(textoDescanso)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel8))
+                                    .addGap(0, 0, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(textoHormigasInsecto)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(textoHormigasComida))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,11 +346,11 @@ public class Interfaz extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textoRefugio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonInsecto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(botonPausa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(botonPausa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botonReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonInsecto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -348,6 +377,12 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_botonReanudarActionPerformed
 
     private void botonInsectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsectoActionPerformed
+        if(!colonia.getAmenaza()){  // si ahora mismo no hay amenaza creamos una
+            
+            CyclicBarrier hSoldadoFuera = new CyclicBarrier(numeroHSoldado);
+            colonia.setBarreraAmenaza(hSoldadoFuera);
+            
+        }
         
     }//GEN-LAST:event_botonInsectoActionPerformed
 

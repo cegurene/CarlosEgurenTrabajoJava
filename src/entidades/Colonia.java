@@ -1,6 +1,8 @@
 package entidades;
 
 import static java.lang.Thread.sleep;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -33,9 +35,14 @@ public class Colonia {
     
     private Paso paso;
     
+    private boolean amenaza;
+    private CyclicBarrier barreraAmenaza;
+    
     public Colonia(ListaHormigas refugio, ListaHormigas zonaComer, ListaHormigas zonaDescanso, ListaHormigas instruccion, ListaHormigas almacen, ListaHormigas insecto, ListaHormigas buscando, Paso paso, JTextField nComidaAlmacen, JTextField nComidaZonaComer){
         numeroComidaAlmacen = 0;
         numeroComidaZonaComer = 0;
+        amenaza = false;
+        
         this.hormigasRefugio = refugio;
         this.hormigasComer = zonaComer;
         this.hormigasDescanso = zonaDescanso;
@@ -46,6 +53,18 @@ public class Colonia {
         this.paso = paso;
         this.nComidaAlmacen = nComidaAlmacen;
         this.nComidaZonaComer = nComidaZonaComer;
+    }
+    
+    public boolean getAmenaza(){
+        return amenaza;
+    }
+    
+    public void setAmenaza(boolean amenaza){
+        this.amenaza = amenaza;
+    }
+    
+    public void setBarreraAmenaza(CyclicBarrier barreraAmenaza){
+        this.barreraAmenaza = barreraAmenaza;
     }
     
     public void actualizarComidaAlmacen(){
@@ -265,4 +284,17 @@ public class Colonia {
         hormigasComer.sacar(id);
         paso.mirar();
     }
+
+    public void lucharAmenaza(String id){
+        try {
+            barreraAmenaza.await();
+            sleep(20000);  // simulamos que luchamos contra el insecto
+
+            barreraAmenaza.await();
+            
+        } catch (InterruptedException | BrokenBarrierException ex) {
+            Logger.getLogger(Colonia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
