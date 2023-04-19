@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HormigaCria extends Thread{
-    private int idNumero = 0;
+    private int idNumero;
     private String idStr;
     private Colonia colonia;
     private Paso paso;
@@ -44,30 +44,15 @@ public class HormigaCria extends Thread{
         }
     }
     
-    public void comprobarAmenaza(){
-        if(colonia.getAmenaza()){
-            colonia.refugio(idStr);
-        }
-        
-        try{
-            cerrojo.lock();
-            while(colonia.getAmenaza()){
-                try{
-                    parar.await();
-                } catch(InterruptedException ie){ }
-            }
-        }
-        finally{
-            cerrojo.unlock();
-        }
-    }
-    
     public void run(){
         
         while(true){
+            colonia.comprobarAmenaza(idStr);
             colonia.zonaComer(3, 5, idStr, true);
+            colonia.comprobarAmenaza(idStr);
             paso.mirar();
             colonia.descanso(4, idStr);
+            colonia.comprobarAmenaza(idStr);
             paso.mirar();
         }
     }

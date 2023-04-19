@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HormigaObrera extends Thread{
-    private int idNumero = 0;
+    private int idNumero;
     private String idStr;
     private Colonia colonia;
     boolean par;
@@ -38,7 +38,6 @@ public class HormigaObrera extends Thread{
     }
     
     public void run(){
-        //calculoID();
         
         int i = 1;
         while(true){

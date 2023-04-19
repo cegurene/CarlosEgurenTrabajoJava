@@ -1,0 +1,235 @@
+19-49-2023 10.49.46: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-49-2023 10.49.46: La hormiga obrera HO0001 empieza a buscar comida.
+19-49-2023 10.49.50: La hormiga obrera HO0001 entra a la colonia.
+19-49-2023 10.49.50: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-49-2023 10.49.54: La hormiga cria HC0001 entra a la zona de comer para meter comida.
+19-49-2023 10.49.57: La hormiga obrera HO0003 sale de la colonia por la salida 1.
+19-49-2023 10.49.57: La hormiga obrera HO0003 empieza a buscar comida.
+19-05-2023 11.05.33: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-05-2023 11.05.33: La hormiga obrera HO0001 empieza a buscar comida.
+19-05-2023 11.05.37: La hormiga obrera HO0001 entra a la colonia.
+19-05-2023 11.05.37: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-05-2023 11.05.37: La hormiga obrera HO0002 entra en el almacen para sacar comida.
+19-05-2023 11.05.38: La hormiga cria HC0001 entra a la zona de comer para meter comida.
+19-05-2023 11.05.38: La hormiga soldado HS0001 entra a la zona de comer para comer.
+19-05-2023 11.05.40: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-05-2023 11.05.40: La hormiga obrera HO0001 empieza a buscar comida.
+19-05-2023 11.05.41: La hormiga obrera HO0003 sale de la colonia por la salida 1.
+19-05-2023 11.05.41: La hormiga obrera HO0003 empieza a buscar comida.
+19-05-2023 11.05.41: La hormiga obrera HO0002 entra a la zona de comer para meter comida.
+19-05-2023 11.05.41: La hormiga soldado HS0001 empieza la instruccion.
+19-05-2023 11.05.42: La hormiga cria HC0001 comienza a descansar.
+19-05-2023 11.05.42: La hormiga cria HC0001 entra a la zona de comer para meter comida.
+19-05-2023 11.05.43: La hormiga soldado HS0001 comienza a descansar.
+19-05-2023 11.05.44: La hormiga obrera HO0001 entra a la colonia.
+19-05-2023 11.05.44: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-05-2023 11.05.44: La hormiga obrera HO0002 entra en el almacen para sacar comida.
+19-05-2023 11.05.45: La hormiga obrera HO0003 entra a la colonia.
+19-05-2023 11.05.45: La hormiga obrera HO0003 entra en el almacen para meter comida.
+19-05-2023 11.05.45: La hormiga obrera HO0004 entra en el almacen para sacar comida.
+19-05-2023 11.05.45: La hormiga soldado HS0001 empieza la instruccion.
+19-05-2023 11.05.45: La hormiga obrera HO0005 sale de la colonia por la salida 1.
+19-05-2023 11.05.45: La hormiga obrera HO0005 empieza a buscar comida.
+19-05-2023 11.05.46: La hormiga soldado HS0002 entra a la zona de comer para comer.
+19-05-2023 11.05.46: La hormiga soldado HS0002 empieza la instruccion.
+19-05-2023 11.05.47: La hormiga cria HC0001 comienza a descansar.
+19-05-2023 11.05.47: La hormiga soldado HS0001 comienza a descansar.
+19-05-2023 11.05.47: La hormiga obrera HO0003 sale de la colonia por la salida 1.
+19-05-2023 11.05.47: La hormiga obrera HO0003 empieza a buscar comida.
+19-05-2023 11.05.48: La hormiga cria HC0001 entra a la zona de comer para meter comida.
+19-05-2023 11.05.48: La hormiga obrera HO0002 entra a la zona de comer para meter comida.
+19-05-2023 11.05.48: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-05-2023 11.05.48: La hormiga obrera HO0001 empieza a buscar comida.
+19-05-2023 11.05.48: La hormiga soldado HS0001 empieza la instruccion.
+19-05-2023 11.05.48: La hormiga obrera HO0004 entra a la zona de comer para meter comida.
+19-05-2023 11.05.49: La hormiga cria HC0002 entra a la zona de comer para meter comida.
+19-05-2023 11.05.49: La hormiga obrera HO0005 entra a la colonia.
+19-05-2023 11.05.49: La hormiga obrera HO0005 entra en el almacen para meter comida.
+19-05-2023 11.05.49: La hormiga obrera HO0002 entra en el almacen para sacar comida.
+19-05-2023 11.05.53: La hormiga obrera HO0003 entra a la colonia.
+19-05-2023 11.05.53: La hormiga obrera HO0005 sale de la colonia por la salida 1.
+19-05-2023 11.05.53: La hormiga cria HC0001 comienza a descansar.
+19-05-2023 11.05.53: La hormiga soldado HS0002 comienza a descansar.
+19-05-2023 11.05.53: La hormiga obrera HO0001 entra a la colonia.
+19-05-2023 11.05.53: La hormiga obrera HO0003 entra en el almacen para meter comida.
+19-05-2023 11.05.53: La hormiga obrera HO0005 empieza a buscar comida.
+19-05-2023 11.05.53: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-05-2023 11.05.53: La hormiga obrera HO0004 entra en el almacen para sacar comida.
+19-05-2023 11.05.53: La hormiga obrera HO0006 entra en el almacen para sacar comida.
+19-05-2023 11.05.53: La hormiga cria HC0002 comienza a descansar.
+19-05-2023 11.05.54: La hormiga obrera HO0002 entra a la zona de comer para meter comida.
+19-05-2023 11.05.54: La hormiga cria HC0002 entra a la zona de comer para meter comida.
+19-05-2023 11.05.54: La hormiga soldado HS0001 comienza a descansar.
+19-05-2023 11.05.55: La hormiga soldado HS0002 empieza la instruccion.
+19-05-2023 11.05.55: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-05-2023 11.05.55: La hormiga obrera HO0001 empieza a buscar comida.
+19-05-2023 11.05.56: La hormiga obrera HO0007 sale de la colonia por la salida 1.
+19-05-2023 11.05.56: La hormiga obrera HO0007 empieza a buscar comida.
+19-05-2023 11.05.56: La hormiga soldado HS0001 empieza la instruccion.
+19-05-2023 11.05.56: La hormiga cria HC0001 entra a la zona de comer para meter comida.
+19-05-2023 11.05.57: La hormiga obrera HO0003 sale de la colonia por la salida 1.
+19-05-2023 11.05.57: La hormiga obrera HO0003 empieza a buscar comida.
+19-05-2023 11.05.57: La hormiga obrera HO0005 entra a la colonia.
+19-05-2023 11.05.57: La hormiga obrera HO0005 entra en el almacen para meter comida.
+19-05-2023 11.05.57: La hormiga obrera HO0002 entra en el almacen para sacar comida.
+19-05-2023 11.05.57: La hormiga obrera HO0004 entra a la zona de comer para meter comida.
+19-05-2023 11.05.58: La hormiga obrera HO0006 entra a la zona de comer para meter comida.
+19-05-2023 11.05.58: La hormiga cria HC0002 se mete en el refugio.
+19-05-2023 11.05.59: La hormiga soldado HS0001 sale de la colonia por la salida 1.
+19-05-2023 11.05.59: La hormiga obrera HO0001 entra a la colonia.
+19-05-2023 11.05.59: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-05-2023 11.05.59: La hormiga obrera HO0008 entra en el almacen para sacar comida.
+19-06-2023 11.06.00: La hormiga obrera HO0007 entra a la colonia.
+19-06-2023 11.06.00: La hormiga obrera HO0007 entra en el almacen para meter comida.
+19-06-2023 11.06.00: La hormiga obrera HO0004 entra en el almacen para sacar comida.
+19-06-2023 11.06.00: La hormiga obrera HO0002 entra a la zona de comer para meter comida.
+19-06-2023 11.06.00: La hormiga obrera HO0005 sale de la colonia por la salida 1.
+19-06-2023 11.06.00: La hormiga obrera HO0005 empieza a buscar comida.
+19-06-2023 11.06.01: La hormiga cria HC0001 se mete en el refugio.
+19-06-2023 11.06.01: La hormiga obrera HO0003 entra a la colonia.
+19-06-2023 11.06.01: La hormiga obrera HO0003 entra en el almacen para meter comida.
+19-06-2023 11.06.01: La hormiga obrera HO0006 entra en el almacen para sacar comida.
+19-06-2023 11.06.01: La hormiga soldado HS0003 sale de la colonia por la salida 1.
+19-06-2023 11.06.01: La hormiga soldado HS0002 sale de la colonia por la salida 1.
+19-06-2023 11.06.01: La hormiga soldado HS0002 esta luchando contra el insecto.
+19-06-2023 11.06.01: La hormiga soldado HS0001 esta luchando contra el insecto.
+19-06-2023 11.06.01: La hormiga soldado HS0003 esta luchando contra el insecto.
+19-06-2023 11.06.02: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-06-2023 11.06.02: La hormiga obrera HO0001 empieza a buscar comida.
+19-06-2023 11.06.02: La hormiga cria HC0003 se mete en el refugio.
+19-06-2023 11.06.03: La hormiga obrera HO0007 sale de la colonia por la salida 1.
+19-06-2023 11.06.03: La hormiga obrera HO0007 empieza a buscar comida.
+19-06-2023 11.06.03: La hormiga obrera HO0008 entra a la zona de comer para meter comida.
+19-06-2023 11.06.04: La hormiga obrera HO0004 entra a la zona de comer para meter comida.
+19-06-2023 11.06.04: La hormiga obrera HO0006 entra a la zona de comer para meter comida.
+19-06-2023 11.06.04: La hormiga obrera HO0003 sale de la colonia por la salida 1.
+19-06-2023 11.06.04: La hormiga obrera HO0003 empieza a buscar comida.
+19-06-2023 11.06.04: La hormiga obrera HO0005 entra a la colonia.
+19-06-2023 11.06.04: La hormiga obrera HO0005 entra en el almacen para meter comida.
+19-06-2023 11.06.04: La hormiga obrera HO0002 entra en el almacen para sacar comida.
+19-06-2023 11.06.06: La hormiga obrera HO0009 sale de la colonia por la salida 1.
+19-06-2023 11.06.06: La hormiga obrera HO0009 empieza a buscar comida.
+19-06-2023 11.06.06: La hormiga obrera HO0001 entra a la colonia.
+19-06-2023 11.06.06: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-06-2023 11.06.06: La hormiga obrera HO0008 entra en el almacen para sacar comida.
+19-06-2023 11.06.07: La hormiga obrera HO0005 sale de la colonia por la salida 1.
+19-06-2023 11.06.07: La hormiga obrera HO0005 empieza a buscar comida.
+19-06-2023 11.06.07: La hormiga obrera HO0007 entra a la colonia.
+19-06-2023 11.06.07: La hormiga obrera HO0007 entra en el almacen para meter comida.
+19-06-2023 11.06.07: La hormiga obrera HO0004 entra en el almacen para sacar comida.
+19-06-2023 11.06.08: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-06-2023 11.06.08: La hormiga obrera HO0001 empieza a buscar comida.
+19-06-2023 11.06.08: La hormiga obrera HO0003 entra a la colonia.
+19-06-2023 11.06.08: La hormiga obrera HO0002 entra a la zona de comer para meter comida.
+19-06-2023 11.06.08: La hormiga obrera HO0003 entra en el almacen para meter comida.
+19-06-2023 11.06.08: La hormiga obrera HO0006 entra en el almacen para sacar comida.
+19-06-2023 11.06.10: La hormiga obrera HO0009 entra a la colonia.
+19-06-2023 11.06.10: La hormiga obrera HO0009 entra en el almacen para meter comida.
+19-06-2023 11.06.10: La hormiga obrera HO0004 entra a la zona de comer para meter comida.
+19-06-2023 11.06.10: La hormiga obrera HO0010 entra en el almacen para sacar comida.
+19-06-2023 11.06.10: La hormiga obrera HO0011 sale de la colonia por la salida 1.
+19-06-2023 11.06.10: La hormiga obrera HO0011 empieza a buscar comida.
+19-06-2023 11.06.10: La hormiga obrera HO0008 entra a la zona de comer para meter comida.
+19-06-2023 11.06.10: La hormiga obrera HO0007 sale de la colonia por la salida 1.
+19-06-2023 11.06.10: La hormiga obrera HO0007 empieza a buscar comida.
+19-06-2023 11.06.11: La hormiga obrera HO0005 entra a la colonia.
+19-06-2023 11.06.11: La hormiga obrera HO0005 entra en el almacen para meter comida.
+19-06-2023 11.06.11: La hormiga obrera HO0002 entra en el almacen para sacar comida.
+19-06-2023 11.06.11: La hormiga soldado HS0004 sale de la colonia por la salida 1.
+19-06-2023 11.06.11: La hormiga obrera HO0006 entra a la zona de comer para meter comida.
+19-06-2023 11.06.12: La hormiga obrera HO0009 sale de la colonia por la salida 1.
+19-06-2023 11.06.12: La hormiga obrera HO0003 sale de la colonia por la salida 2.
+19-06-2023 11.06.12: La hormiga obrera HO0009 empieza a buscar comida.
+19-06-2023 11.06.12: La hormiga obrera HO0003 empieza a buscar comida.
+19-06-2023 11.06.12: La hormiga obrera HO0001 entra a la colonia.
+19-06-2023 11.06.12: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-06-2023 11.06.12: La hormiga obrera HO0008 entra en el almacen para sacar comida.
+19-06-2023 11.06.12: La hormiga cria HC0004 se mete en el refugio.
+19-06-2023 11.06.13: La hormiga obrera HO0002 entra a la zona de comer para meter comida.
+19-06-2023 11.06.13: La hormiga obrera HO0010 entra a la zona de comer para meter comida.
+19-06-2023 11.06.14: La hormiga obrera HO0011 entra a la colonia.
+19-06-2023 11.06.14: La hormiga obrera HO0011 entra en el almacen para meter comida.
+19-06-2023 11.06.14: La hormiga obrera HO0004 entra en el almacen para sacar comida.
+19-06-2023 11.06.14: La hormiga obrera HO0007 entra a la colonia.
+19-06-2023 11.06.14: La hormiga obrera HO0007 entra en el almacen para meter comida.
+19-06-2023 11.06.14: La hormiga obrera HO0006 entra en el almacen para sacar comida.
+19-06-2023 11.06.14: La hormiga obrera HO0008 entra a la zona de comer para meter comida.
+19-06-2023 11.06.15: La hormiga obrera HO0005 sale de la colonia por la salida 1.
+19-06-2023 11.06.15: La hormiga obrera HO0005 empieza a buscar comida.
+19-06-2023 11.06.15: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-06-2023 11.06.15: La hormiga obrera HO0001 empieza a buscar comida.
+19-06-2023 11.06.16: La hormiga obrera HO0013 sale de la colonia por la salida 1.
+19-06-2023 11.06.16: La hormiga obrera HO0009 entra a la colonia.
+19-06-2023 11.06.16: La hormiga obrera HO0013 empieza a buscar comida.
+19-06-2023 11.06.16: La hormiga obrera HO0003 entra a la colonia.
+19-06-2023 11.06.16: La hormiga obrera HO0009 entra en el almacen para meter comida.
+19-06-2023 11.06.16: La hormiga obrera HO0003 entra en el almacen para meter comida.
+19-06-2023 11.06.16: La hormiga obrera HO0012 entra en el almacen para sacar comida.
+19-06-2023 11.06.16: La hormiga obrera HO0002 entra en el almacen para sacar comida.
+19-06-2023 11.06.17: La hormiga obrera HO0004 entra a la zona de comer para meter comida.
+19-06-2023 11.06.17: La hormiga obrera HO0011 sale de la colonia por la salida 1.
+19-06-2023 11.06.17: La hormiga obrera HO0011 empieza a buscar comida.
+19-06-2023 11.06.17: La hormiga obrera HO0006 entra a la zona de comer para meter comida.
+19-06-2023 11.06.18: La hormiga obrera HO0007 sale de la colonia por la salida 1.
+19-06-2023 11.06.18: La hormiga obrera HO0007 empieza a buscar comida.
+19-06-2023 11.06.19: La hormiga obrera HO0005 entra a la colonia.
+19-06-2023 11.06.19: La hormiga obrera HO0005 entra en el almacen para meter comida.
+19-06-2023 11.06.19: La hormiga obrera HO0010 entra en el almacen para sacar comida.
+19-06-2023 11.06.19: La hormiga obrera HO0009 sale de la colonia por la salida 1.
+19-06-2023 11.06.19: La hormiga obrera HO0009 empieza a buscar comida.
+19-06-2023 11.06.19: La hormiga obrera HO0003 sale de la colonia por la salida 1.
+19-06-2023 11.06.19: La hormiga obrera HO0003 empieza a buscar comida.
+19-06-2023 11.06.19: La hormiga obrera HO0001 entra a la colonia.
+19-06-2023 11.06.19: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-06-2023 11.06.19: La hormiga obrera HO0008 entra en el almacen para sacar comida.
+19-06-2023 11.06.20: La hormiga soldado HS0005 sale de la colonia por la salida 1.
+19-06-2023 11.06.20: La hormiga obrera HO0012 entra a la zona de comer para meter comida.
+19-06-2023 11.06.20: La hormiga obrera HO0013 entra a la colonia.
+19-06-2023 11.06.20: La hormiga obrera HO0013 entra en el almacen para meter comida.
+19-06-2023 11.06.20: La hormiga obrera HO0002 entra a la zona de comer para meter comida.
+19-06-2023 11.06.20: La hormiga obrera HO0014 entra en el almacen para sacar comida.
+19-06-2023 11.06.21: La hormiga obrera HO0011 entra a la colonia.
+19-06-2023 11.06.21: La hormiga obrera HO0011 entra en el almacen para meter comida.
+19-06-2023 11.06.21: La hormiga obrera HO0004 entra en el almacen para sacar comida.
+19-06-2023 11.06.22: La hormiga obrera HO0005 sale de la colonia por la salida 1.
+19-06-2023 11.06.22: La hormiga obrera HO0005 empieza a buscar comida.
+19-06-2023 11.06.22: La hormiga obrera HO0008 entra a la zona de comer para meter comida.
+19-06-2023 11.06.22: La hormiga obrera HO0007 entra a la colonia.
+19-06-2023 11.06.22: La hormiga obrera HO0007 entra en el almacen para meter comida.
+19-06-2023 11.06.22: La hormiga obrera HO0006 entra en el almacen para sacar comida.
+19-06-2023 11.06.22: La hormiga obrera HO0014 entra a la zona de comer para meter comida.
+19-06-2023 11.06.22: La hormiga cria HC0005 se mete en el refugio.
+19-06-2023 11.06.23: La hormiga obrera HO0009 entra a la colonia.
+19-06-2023 11.06.23: La hormiga obrera HO0009 entra en el almacen para meter comida.
+19-06-2023 11.06.23: La hormiga obrera HO0012 entra en el almacen para sacar comida.
+19-06-2023 11.06.23: La hormiga obrera HO0003 entra a la colonia.
+19-06-2023 11.06.23: La hormiga obrera HO0003 entra en el almacen para meter comida.
+19-06-2023 11.06.23: La hormiga obrera HO0002 entra en el almacen para sacar comida.
+19-06-2023 11.06.23: La hormiga obrera HO0010 entra a la zona de comer para meter comida.
+19-06-2023 11.06.23: La hormiga obrera HO0001 sale de la colonia por la salida 1.
+19-06-2023 11.06.23: La hormiga obrera HO0001 empieza a buscar comida.
+19-06-2023 11.06.23: La hormiga obrera HO0013 sale de la colonia por la salida 1.
+19-06-2023 11.06.23: La hormiga obrera HO0013 empieza a buscar comida.
+19-06-2023 11.06.23: La hormiga obrera HO0004 entra a la zona de comer para meter comida.
+19-06-2023 11.06.24: La hormiga obrera HO0011 sale de la colonia por la salida 1.
+19-06-2023 11.06.24: La hormiga obrera HO0011 empieza a buscar comida.
+19-06-2023 11.06.24: La hormiga obrera HO0006 entra a la zona de comer para meter comida.
+19-06-2023 11.06.25: La hormiga obrera HO0015 sale de la colonia por la salida 1.
+19-06-2023 11.06.25: La hormiga obrera HO0015 empieza a buscar comida.
+19-06-2023 11.06.26: La hormiga obrera HO0007 sale de la colonia por la salida 1.
+19-06-2023 11.06.26: La hormiga obrera HO0007 empieza a buscar comida.
+19-06-2023 11.06.26: La hormiga obrera HO0005 entra a la colonia.
+19-06-2023 11.06.26: La hormiga obrera HO0005 entra en el almacen para meter comida.
+19-06-2023 11.06.26: La hormiga obrera HO0008 entra en el almacen para sacar comida.
+19-06-2023 11.06.26: La hormiga obrera HO0003 sale de la colonia por la salida 1.
+19-06-2023 11.06.26: La hormiga obrera HO0003 empieza a buscar comida.
+19-06-2023 11.06.26: La hormiga obrera HO0009 sale de la colonia por la salida 1.
+19-06-2023 11.06.26: La hormiga obrera HO0009 empieza a buscar comida.
+19-06-2023 11.06.26: La hormiga obrera HO0002 entra a la zona de comer para meter comida.
+19-06-2023 11.06.27: La hormiga obrera HO0001 entra a la colonia.
+19-06-2023 11.06.27: La hormiga obrera HO0001 entra en el almacen para meter comida.
+19-06-2023 11.06.27: La hormiga obrera HO0014 entra en el almacen para sacar comida.
+19-06-2023 11.06.27: La hormiga obrera HO0012 entra a la zona de comer para meter comida.
+19-06-2023 11.06.27: La hormiga obrera HO0013 entra a la colonia.
+19-06-2023 11.06.27: La hormiga obrera HO0013 entra en el almacen para meter comida.
+19-06-2023 11.06.27: La hormiga obrera HO0010 entra en el almacen para sacar comida.

@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HormigaSoldado extends Thread{
-    private int idNumero = 0;
+    private int idNumero;
     private String idStr;
     private Colonia colonia;
     private Paso paso;
@@ -41,29 +41,24 @@ public class HormigaSoldado extends Thread{
         }
     }
     
-    public void comprobarAmenaza(){
-        if(colonia.getAmenaza()){
-            colonia.salir(idStr);
-            colonia.lucharAmenaza(idStr);
-            colonia.entrar(idStr);
-        }
-    }
-    
-    public void run(){
-        //calculoID();
-        
+    public void run(){        
         int i = 0;
         
-        while(true){
+        while(true){  // hace 6 veces 1 rutina y despues la otra
             if(i % 6 == 0){
                 // cada 6 iteracciones
+                colonia.comprobarAmenaza(idStr);
                 colonia.zonaComer(0, 3, idStr, false);
+                colonia.comprobarAmenaza(idStr);
                 paso.mirar();
             }
             else{
+                colonia.comprobarAmenaza(idStr);
                 colonia.instruccion(2, 8, idStr);
+                colonia.comprobarAmenaza(idStr);
                 paso.mirar();
                 colonia.descanso(2, idStr);
+                colonia.comprobarAmenaza(idStr);
                 paso.mirar();
             }
             i++;
