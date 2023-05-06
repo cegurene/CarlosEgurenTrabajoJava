@@ -10,10 +10,19 @@ se imprime su nuevo contenido en el JTextField que toma como parámetro el constr
 public class ListaHormigas{
     ArrayList<String> lista;
     JTextField tf;
+    ArrayList<Thread> listaObjeto;
     
     public ListaHormigas(JTextField tf){
         lista=new ArrayList<String>();
         this.tf=tf;
+    }
+    
+    public ListaHormigas(){
+        listaObjeto=new ArrayList<Thread>();
+    }
+    
+    public ArrayList<Thread> getListaHormigas(){
+        return listaObjeto;
     }
 
     public synchronized void meter(String id){
@@ -32,5 +41,13 @@ public class ListaHormigas{
            contenido = contenido + lista.get(i) + " ";
         }
         tf.setText(contenido);
+    }
+    
+    public synchronized void meterLista(Thread th){
+        listaObjeto.add(th);
+    }
+    
+    public synchronized void sacarLista(Thread th){
+        listaObjeto.remove(th);
     }
 }

@@ -1,5 +1,6 @@
 package interfaz;
 
+import ParteDistribuida.EnvioValores;
 import entidades.Colonia;
 import entidades.HormigaCria;
 import entidades.HormigaObrera;
@@ -7,15 +8,20 @@ import entidades.HormigaSoldado;
 import entidades.ListaHormigas;
 import entidades.Paso;
 import static java.lang.Thread.sleep;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.concurrent.CyclicBarrier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author charl
- */
 public class Interfaz extends javax.swing.JFrame {
+    
+
+    private EnvioValores envio;
+
 
     private Paso paso = new Paso();
     private boolean pausado;
@@ -29,13 +35,16 @@ public class Interfaz extends javax.swing.JFrame {
     private ListaHormigas hormigasBuscando;
     private Colonia colonia;
     
-    int numeroHObrera;
-    int numeroHSoldado;
+    private ListaHormigas hormigasSoldadoCreadas = new ListaHormigas();
+    private ListaHormigas hormigasCriaCreadas = new ListaHormigas();
+    
+    private int numeroHObrera;
+    private int numeroHSoldado;
     
     private void crearHormigas() throws InterruptedException{
                 
         while(numeroHObrera <= 6000){
-            HormigaObrera ho = new HormigaObrera(numeroHObrera, colonia, paso);
+            HormigaObrera ho = new HormigaObrera(numeroHObrera, colonia, paso, envio);
             paso.mirar();
             ho.start();
             numeroHObrera++;
@@ -43,16 +52,23 @@ public class Interfaz extends javax.swing.JFrame {
             sleep((long) (Math.random() * 2700 + 800));
             
             if(numeroHObrera % 3 == 0){
-                HormigaSoldado hs = new HormigaSoldado((int) numeroHObrera / 3, colonia, paso);
+                HormigaSoldado hs = new HormigaSoldado((int) numeroHObrera / 3, colonia, paso, envio);
                 paso.mirar();
                 hs.start();
                 numeroHSoldado++;
                 
+                hormigasSoldadoCreadas.meterLista(hs);
+                
                 sleep((long) (Math.random() * 2700 + 800));
                 
-                HormigaCria hc = new HormigaCria((int) numeroHObrera / 3, colonia, paso);
+                HormigaCria hc = new HormigaCria((int) numeroHObrera / 3, colonia, paso, envio);
                 paso.mirar();
                 hc.start();
+                
+                hormigasCriaCreadas.meterLista(hc);
+                if(colonia.getAmenaza()){
+                    hormigasCriaCreadas.getListaHormigas().get(-1).interrupt();
+                }
                 
                 sleep((long) (Math.random() * 2700 + 800));
                 paso.mirar();
@@ -78,17 +94,21 @@ public class Interfaz extends javax.swing.JFrame {
         hormigasBuscando = new ListaHormigas(textoHormigasComida);
                 
         colonia = new Colonia(hormigasRefugio, hormigasComer, hormigasDescanso, hormigasInstruccion, hormigasAlmacen, hormigasInsecto, hormigasBuscando, paso, textoComidaAlmacen, textoComidaZonaComer, textoAmenaza);
-         
-        /*
-        for(int x = 1; x < 11; x++){
-            HormigaSoldado hs = new HormigaSoldado(x, colonia, paso);
-            HormigaCria hc = new HormigaCria(x, colonia, paso);
-            HormigaObrera ho = new HormigaObrera(x, colonia, paso);
-            hs.start();
-            hc.start();
-            ho.start();
-        }*/
-                
+        
+        try {
+            envio = new EnvioValores(0, 0, 0, 0, 0, 0);
+            colonia.setEnvio(envio);
+            
+            //Arranca rmiregistry local en el puerto 1099
+            Registry registry = LocateRegistry.createRegistry(1099);
+            
+            //rebind sólo funciona sobre una url del equipo local 
+            Naming.rebind("//localhost/VistaNumeroHormigas", envio);
+            
+        } catch (RemoteException | MalformedURLException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         // creacion de hilos
         new Thread(new Runnable(){
             @Override
@@ -347,14 +367,23 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void botonInsectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsectoActionPerformed
         if(!colonia.getAmenaza()){  // si ahora mismo no hay amenaza creamos una
+            colonia.setAmenaza(true);
+            textoAmenaza.setText("Amenaza en curso");
             
             CyclicBarrier hSoldadoFuera = new CyclicBarrier(numeroHSoldado);
             colonia.setBarreraAmenaza(hSoldadoFuera);
-            textoAmenaza.setText("Amenaza en curso");
-            colonia.setAmenaza(true);
+            for(int i = 0; i < hormigasSoldadoCreadas.getListaHormigas().size(); i++){
+                hormigasSoldadoCreadas.getListaHormigas().get(i).interrupt();
+            }
+            
+            int j = 0;
+            while(j < hormigasCriaCreadas.getListaHormigas().size()){
+                hormigasCriaCreadas.getListaHormigas().get(j).interrupt();
+                j++;
+            }
             
         }
-        
+                
     }//GEN-LAST:event_botonInsectoActionPerformed
 
     private void textoHormigasComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoHormigasComidaActionPerformed

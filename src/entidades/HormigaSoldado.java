@@ -1,12 +1,7 @@
 package entidades;
  
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import ParteDistribuida.EnvioValores;
 
 public class HormigaSoldado extends Thread{
     private int idNumero;
@@ -14,11 +9,13 @@ public class HormigaSoldado extends Thread{
     private Colonia colonia;
     private Paso paso;
     private CyclicBarrier barreraAmenaza1;
+    private EnvioValores envio;
     
-    public HormigaSoldado(int id, Colonia colonia, Paso paso){
+    public HormigaSoldado(int id, Colonia colonia, Paso paso, EnvioValores envio){
         this.idNumero = id;
         this.colonia = colonia;
         this.paso = paso;
+        this.envio = envio;
         calculoID();
     }
     
@@ -43,26 +40,28 @@ public class HormigaSoldado extends Thread{
     
     public void run(){        
         int i = 0;
+        colonia.entrar(idStr);
         
         while(true){  // hace 6 veces 1 rutina y despues la otra
-            if(i % 6 == 0){
-                // cada 6 iteracciones
-                colonia.comprobarAmenaza(idStr);
-                colonia.zonaComer(0, 3, idStr, false);
-                colonia.comprobarAmenaza(idStr);
-                paso.mirar();
+            try{
+                
+                if(i % 6 == 0){
+                    // cada 6 iteracciones
+                    paso.mirar();
+                    colonia.zonaComer(0, 3, idStr, false);  // entra en la zona para comer a comer
+                }
+                else{
+                    paso.mirar();
+                    colonia.instruccion(2, 8, idStr);  // entra a realizar la instruccion
+
+                    paso.mirar();
+                    colonia.descanso(2, idStr);  // entra a descansar
+                }
+                i++;
             }
-            else{
-                colonia.comprobarAmenaza(idStr);
-                colonia.instruccion(2, 8, idStr);
-                colonia.comprobarAmenaza(idStr);
-                paso.mirar();
-                colonia.descanso(2, idStr);
-                colonia.comprobarAmenaza(idStr);
-                paso.mirar();
-            }
-            i++;
-        }
-        
+            catch(Exception e){
+                colonia.lucharAmenaza(idStr);
+            }           
+        }      
     }
 }

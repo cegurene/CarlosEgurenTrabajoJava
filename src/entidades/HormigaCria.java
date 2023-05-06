@@ -1,27 +1,19 @@
 package entidades;
  
-import static java.lang.Thread.sleep;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import ParteDistribuida.EnvioValores;
 
 public class HormigaCria extends Thread{
     private int idNumero;
     private String idStr;
     private Colonia colonia;
     private Paso paso;
+    private EnvioValores envio;
     
-    private Lock cerrojo = new ReentrantLock();
-    private Condition parar = cerrojo.newCondition();
-    
-    public HormigaCria(int id, Colonia colonia, Paso paso){
+    public HormigaCria(int id, Colonia colonia, Paso paso, EnvioValores envio){
         this.idNumero = id;
         this.colonia = colonia;
         this.paso = paso;
+        this.envio = envio;
         calculoID();
     }
     
@@ -45,15 +37,21 @@ public class HormigaCria extends Thread{
     }
     
     public void run(){
+        colonia.entrar(idStr);
         
         while(true){
-            colonia.comprobarAmenaza(idStr);
-            colonia.zonaComer(3, 5, idStr, true);
-            colonia.comprobarAmenaza(idStr);
-            paso.mirar();
-            colonia.descanso(4, idStr);
-            colonia.comprobarAmenaza(idStr);
-            paso.mirar();
+            try{
+                
+                paso.mirar();
+                colonia.zonaComer(3, 5, idStr, false);  // entra en la zona para comer a comer
+
+                paso.mirar();
+                colonia.descanso(4, idStr);  // entra en la zona de descanso
+                
+            }
+            catch(Exception e){
+                colonia.refugio(idStr);
+            }
         }
     }
 }
