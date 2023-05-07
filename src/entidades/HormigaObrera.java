@@ -42,11 +42,7 @@ public class HormigaObrera extends Thread{
     
     public void comportamientoPar(){
         paso.mirar();
-        colonia.actualizarHormigasAlmacen(idStr, true, false);  //entra en el almacen a sacar comida
-        paso.mirar();
-        colonia.almacen(1, 2, idStr, false);
-        paso.mirar();
-        colonia.actualizarHormigasAlmacen(idStr, false, false);  //sale del almacen
+        colonia.almacen(1, 2, idStr, false);  //entra en el almacen a sacar comida
 
         try {
             sleep(1000 + (int)(2000*Math.random()));  // viaja a la zona para comer (1-3s)
@@ -77,11 +73,7 @@ public class HormigaObrera extends Thread{
         envio.actualizarHormigasObrerasInterior(true);
 
         paso.mirar();
-        colonia.actualizarHormigasAlmacen(idStr, true, true);  // entra en el almacen a dejar comida
-        paso.mirar();
-        colonia.almacen(2, 4, idStr, true);
-        paso.mirar();
-        colonia.actualizarHormigasAlmacen(idStr, false, true);  // sale del almacen
+        colonia.almacen(2, 4, idStr, true);  // entra en el almacen a dejar comida
     }
     
     public void run(){

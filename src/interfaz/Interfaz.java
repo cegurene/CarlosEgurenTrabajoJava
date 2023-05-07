@@ -41,7 +41,7 @@ public class Interfaz extends javax.swing.JFrame {
     private int numeroHObrera;
     private int numeroHSoldado;
     
-    private void crearHormigas() throws InterruptedException{
+    public void crearHormigas() throws InterruptedException{
                 
         while(numeroHObrera <= 6000){
             HormigaObrera ho = new HormigaObrera(numeroHObrera, colonia, paso, envio);
@@ -67,13 +67,48 @@ public class Interfaz extends javax.swing.JFrame {
                 
                 hormigasCriaCreadas.meterLista(hc);
                 if(colonia.getAmenaza()){
-                    hormigasCriaCreadas.getListaHormigas().get(-1).interrupt();
+                    hormigasCriaCreadas.getListaHormigas().get(hormigasCriaCreadas.getListaHormigas().size() - 1).interrupt();
                 }
                 
                 sleep((long) (Math.random() * 2700 + 800));
                 paso.mirar();
             }
         }
+    }
+    
+    public void crearAmenaza(){
+        if(!colonia.getAmenaza()){  // si ahora mismo no hay amenaza creamos una
+            colonia.setAmenaza(true);
+            textoAmenaza.setText("Amenaza en curso");
+            envio.setAmenaza(true);
+            
+            CyclicBarrier hSoldadoFuera = new CyclicBarrier(numeroHSoldado - 1);
+            colonia.setBarreraAmenaza(hSoldadoFuera);
+            
+            int j = 0;
+            while(j < hormigasCriaCreadas.getListaHormigas().size()){
+                hormigasCriaCreadas.getListaHormigas().get(j).interrupt();
+                j++;
+            }
+            
+            for(int i = 0; i < hormigasSoldadoCreadas.getListaHormigas().size(); i++){
+                hormigasSoldadoCreadas.getListaHormigas().get(i).interrupt();
+            }
+            
+            while(colonia.getAmenaza()){
+                try {
+                    sleep(250);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            textoAmenaza.setText("No hay amenaza");
+            envio.setAmenaza(false);
+        }
+    }
+    
+    public static void pulsarBotonAmenaza(){
+        botonInsecto.doClick();
     }
     
     public Interfaz() {
@@ -109,7 +144,7 @@ public class Interfaz extends javax.swing.JFrame {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        // creacion de hilos
+        // creacion de hormigas
         new Thread(new Runnable(){
             @Override
             public void run(){
@@ -366,24 +401,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_botonReanudarActionPerformed
 
     private void botonInsectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsectoActionPerformed
-        if(!colonia.getAmenaza()){  // si ahora mismo no hay amenaza creamos una
-            colonia.setAmenaza(true);
-            textoAmenaza.setText("Amenaza en curso");
-            
-            CyclicBarrier hSoldadoFuera = new CyclicBarrier(numeroHSoldado);
-            colonia.setBarreraAmenaza(hSoldadoFuera);
-            for(int i = 0; i < hormigasSoldadoCreadas.getListaHormigas().size(); i++){
-                hormigasSoldadoCreadas.getListaHormigas().get(i).interrupt();
-            }
-            
-            int j = 0;
-            while(j < hormigasCriaCreadas.getListaHormigas().size()){
-                hormigasCriaCreadas.getListaHormigas().get(j).interrupt();
-                j++;
-            }
-            
-        }
-                
+        crearAmenaza();
     }//GEN-LAST:event_botonInsectoActionPerformed
 
     private void textoHormigasComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoHormigasComidaActionPerformed
@@ -426,7 +444,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonInsecto;
+    private static javax.swing.JButton botonInsecto;
     private javax.swing.JButton botonPausa;
     private javax.swing.JButton botonReanudar;
     private javax.swing.JLabel jLabel0;

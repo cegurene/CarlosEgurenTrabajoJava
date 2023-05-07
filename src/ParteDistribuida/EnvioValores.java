@@ -1,5 +1,7 @@
 package ParteDistribuida;
 
+import entidades.Colonia;
+import interfaz.Interfaz;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.locks.Lock;
@@ -13,6 +15,8 @@ public class EnvioValores extends UnicastRemoteObject implements InterfaceObtene
     private int hormigasSoldadoInvasion;
     private int hormigasCriaZonaComer;
     private int hormigasCriaRefugio;
+    
+    private boolean amenaza;
     
     private Lock cerrojoHOExt = new ReentrantLock();
     private Lock cerrojoHOInt = new ReentrantLock();
@@ -28,6 +32,12 @@ public class EnvioValores extends UnicastRemoteObject implements InterfaceObtene
         this.hormigasSoldadoInvasion = hSInv;
         this.hormigasCriaZonaComer = hCZC;
         this.hormigasCriaRefugio = hCR;
+        
+        this.amenaza = false;
+    }
+    
+    public void setAmenaza(boolean amenaza){
+        this.amenaza = amenaza;
     }
     
     public void actualizarHormigasObrerasExterior(boolean sumar){
@@ -122,6 +132,10 @@ public class EnvioValores extends UnicastRemoteObject implements InterfaceObtene
     
     // metodos para la interfaz cliente
     
+    public boolean getAmenaza() throws RemoteException{
+        return amenaza;
+    }
+    
     public int getHormigasObrerasExterior() throws RemoteException{
         return hormigasObrerasExterior;
     }
@@ -146,4 +160,8 @@ public class EnvioValores extends UnicastRemoteObject implements InterfaceObtene
         return hormigasCriaRefugio;
     }
     
+    // Enviamos al servidor que hemos pulsado el boton de la amenaza
+    public void enviarAmenaza() throws RemoteException{
+        Interfaz.pulsarBotonAmenaza();
+    }
 }

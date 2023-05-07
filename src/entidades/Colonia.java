@@ -33,6 +33,7 @@ public class Colonia {
     private int numeroComidaAlmacen = 0;
     private int numeroComidaZonaComer = 0;
     private int numeroHormigasAlmacen = 0;
+    private Lock cerrojoNumeroHormigasAlmacen = new ReentrantLock();
     private Lock cerrojoAlmacen = new ReentrantLock();
     private Condition esperarAlmacen = cerrojoAlmacen.newCondition();
     
@@ -87,12 +88,27 @@ public class Colonia {
         this.envio = envio;
     }
     
+    public void actualizarNumeroHormigasAlmacen(boolean annadir){
+        cerrojoNumeroHormigasAlmacen.lock();
+        try{
+            if(annadir){
+                numeroHormigasAlmacen++;
+            }
+            else{
+                numeroHormigasAlmacen--;
+            }
+        }
+        finally{
+            cerrojoNumeroHormigasAlmacen.unlock();
+        }
+    }
+    
     public void actualizarHormigasAlmacen(String id, boolean meter, boolean annadirComida){
         if(meter){
             
             try{
                 cerrojoAlmacen.lock();
-                while(numeroHormigasAlmacen == 10 || (!annadirComida && numeroComidaAlmacen == 0)){
+                while(numeroHormigasAlmacen == 10 || (!annadirComida && numeroComidaAlmacen < 0)){
                     esperarAlmacen.await();
                 }
             }
@@ -101,38 +117,47 @@ public class Colonia {
             }            
             finally{
                 cerrojoAlmacen.unlock();
+                paso.mirar();
                 hormigasAlmacen.meter(id);
             }
             
         }
         else{
+            paso.mirar();
             hormigasAlmacen.sacar(id);
         }
+        actualizarNumeroHormigasAlmacen(meter);
     }
     
     public void actualizarHormigasInstruccion(String id, boolean meter){
         if(meter){
+            paso.mirar();
             hormigasInstruccion.meter(id);
         }
         else{
+            paso.mirar();
             hormigasInstruccion.sacar(id);
         }
     }
     
     public void actualizarHormigasDescanso(String id, boolean meter){
         if(meter){
+            paso.mirar();
             hormigasDescanso.meter(id);
         }
         else{
+            paso.mirar();
             hormigasDescanso.sacar(id);
         }
     }
     
     public void actualizarHormigasRefugio(String id, boolean meter){
         if(meter){
+            paso.mirar();
             hormigasRefugio.meter(id);
         }
         else{
+            paso.mirar();
             hormigasRefugio.sacar(id);
         }
     }
@@ -151,29 +176,35 @@ public class Colonia {
             }
             finally{
                 cerrojoZonaComer.unlock();
+                paso.mirar();
                 hormigasComer.meter(id);
             }
             
         }
         else{
+            paso.mirar();
             hormigasComer.sacar(id);
         }
     }
     
     public void actualizarHormigasInsecto(String id, boolean meter){
         if(meter){
+            paso.mirar();
             hormigasInsecto.meter(id);
         }
         else{
+            paso.mirar();
             hormigasInsecto.sacar(id);
         }
     }
     
     public void actualizarHormigasBuscando(String id, boolean meter){
         if(meter){
+            paso.mirar();
             hormigasBuscando.meter(id);
         }
         else{
+            paso.mirar();
             hormigasBuscando.sacar(id);
         }
     }
@@ -189,6 +220,7 @@ public class Colonia {
     }
         
     public void entrar(String idStr){
+        boolean excepcion = false;
         try{
             entrarColonia.acquire();  // pongo semaforo
             String texto = " entra a la colonia.";
@@ -196,10 +228,16 @@ public class Colonia {
             paso.mirar();
             FileManager.guardarDatos(texto, idStr);
         } catch (InterruptedException ex) {
-            Logger.getLogger(Colonia.class.getName()).log(Level.SEVERE, null, ex);
+            excepcion = true;
+            if(comprobarTipoHormmiga(idStr).equals("cria")){
+                entrarColonia.release();
+                refugio(idStr);
+            }
         }
         finally{
-            entrarColonia.release();  // quito semaforo
+            if(!excepcion){
+                entrarColonia.release();  // quito semaforo
+            }
         }
         
     }
@@ -210,9 +248,7 @@ public class Colonia {
                 String texto = " sale de la colonia por la salida 1.";
                 try {
                     sleep(100);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Colonia.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } catch (InterruptedException ex) {}
                 paso.mirar();
                 FileManager.guardarDatos(texto, idStr);
                 salirColonia1.release();
@@ -222,9 +258,7 @@ public class Colonia {
                 String texto = " sale de la colonia por la salida 2.";
                 try {
                     sleep(100);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Colonia.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } catch (InterruptedException ex) {}
                 paso.mirar();
                 FileManager.guardarDatos(texto, idStr);
                 salirColonia2.release();
@@ -247,29 +281,13 @@ public class Colonia {
     }
     
     public void almacen(int minimo, int maximo, String id, boolean annadirComida){
+        actualizarHormigasAlmacen(id, true, annadirComida);
         
-        cerrojoComidaAlmacen.lock();
-        try{
-            if(annadirComida){
-                paso.mirar();
-                numeroComidaAlmacen = numeroComidaAlmacen + 5;  // annadimos comida
-            }
-            else{
-                paso.mirar();
-                numeroComidaAlmacen = numeroComidaAlmacen - 5;  // quitamos comida
-            }
-        }
-        finally{
-            actualizarComidaAlmacen();
-            cerrojoAlmacen.lock();
-            try{
-                esperarAlmacen.signal();
-            }
-            finally{
-                cerrojoAlmacen.unlock();
-            }
-            
-            cerrojoComidaAlmacen.unlock();
+        int rango = maximo - minimo;
+        try {
+            sleep(minimo * 1000 + (int)(rango * 1000 * Math.random()));  //esperamos un tiempo aleatorio
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Colonia.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String txt;
@@ -283,16 +301,38 @@ public class Colonia {
         paso.mirar();
         FileManager.guardarDatos(texto, id);
         paso.mirar();
-
-        int rango = maximo - minimo;
-        try {
-            sleep(minimo * 1000 + (int)(rango * 1000 * Math.random()));  //esperamos un tiempo aleatorio
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Colonia.class.getName()).log(Level.SEVERE, null, ex);
+        
+        cerrojoComidaAlmacen.lock();
+        try{
+            if(annadirComida){
+                paso.mirar();
+                numeroComidaAlmacen = numeroComidaAlmacen + 5;  // annadimos comida
+                /*
+                cerrojoAlmacen.lock();
+                try{
+                    paso.mirar();
+                    esperarAlmacen.signal();
+                }
+                finally{
+                    cerrojoAlmacen.unlock();
+                }*/
+            }
+            else{
+                paso.mirar();
+                numeroComidaAlmacen = numeroComidaAlmacen - 5;  // quitamos comida
+            }
         }
+        finally{
+            actualizarComidaAlmacen();
+            
+            cerrojoComidaAlmacen.unlock();
+        }
+        paso.mirar();
+        actualizarHormigasAlmacen(id, false, annadirComida);
     }
     
     public void instruccion(int minimo, int maximo, String id){
+        boolean excepcion = false;
         try{
             actualizarHormigasInstruccion(id, true);
             envio.actualizarHormigasSoldadoInstruccion(true);
@@ -306,15 +346,18 @@ public class Colonia {
             sleep(minimo * 1000 + (int)(rango * 1000 * Math.random()));
             
         }catch(InterruptedException e){
+            excepcion = true;
             paso.mirar();
             envio.actualizarHormigasSoldadoInstruccion(false);
             actualizarHormigasInstruccion(id, false);
             lucharAmenaza(id);
         }
         finally{
-            paso.mirar();
-            envio.actualizarHormigasSoldadoInstruccion(false);
-            actualizarHormigasInstruccion(id, false);
+            if(!excepcion){
+                paso.mirar();
+                envio.actualizarHormigasSoldadoInstruccion(false);
+                actualizarHormigasInstruccion(id, false);
+            }
         }
     }
     
@@ -327,7 +370,7 @@ public class Colonia {
             FileManager.guardarDatos(texto, id);
             paso.mirar();
 
-            sleep((int)(tiempo * 1000 * Math.random()));
+            sleep((int)(tiempo * 1000));
             
         }catch(InterruptedException ie){
             paso.mirar();
@@ -448,12 +491,20 @@ public class Colonia {
     public void lucharAmenaza(String id){
         try {
             paso.mirar();
+            salir(id);
+            paso.mirar();
             actualizarHormigasInsecto(id, true);
+            envio.actualizarHormigasSoldadoInvasion(true);
+            
             barreraAmenaza.await();
             String texto = " esta luchando contra el insecto.";
             FileManager.guardarDatos(texto, id);
             paso.mirar();
             sleep(20000);  // simulamos que luchamos contra el insectos
+            
+            amenaza = false;
+            actualizarHormigasInsecto(id, false);
+            envio.actualizarHormigasSoldadoInvasion(false);
             
             try{
                 cerrojoAmenaza.lock();
@@ -461,8 +512,7 @@ public class Colonia {
             }
             finally{
                 cerrojoAmenaza.unlock();
-                amenaza = false;
-                actualizarHormigasInsecto(id, false);
+                entrar(id);
             }
             
         } catch (InterruptedException | BrokenBarrierException ex) {

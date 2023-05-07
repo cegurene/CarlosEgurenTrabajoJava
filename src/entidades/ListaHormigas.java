@@ -21,6 +21,10 @@ public class ListaHormigas{
         listaObjeto=new ArrayList<Thread>();
     }
     
+    public ArrayList<String> getListaHormigasStrings(){
+        return lista;
+    }
+    
     public ArrayList<Thread> getListaHormigas(){
         return listaObjeto;
     }

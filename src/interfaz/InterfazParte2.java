@@ -1,6 +1,7 @@
 package interfaz;
 
 import ParteDistribuida.InterfaceObtenerValores;
+import static java.lang.Thread.sleep;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
@@ -11,7 +12,7 @@ public class InterfazParte2 extends javax.swing.JFrame {
      //Localiza el objeto distribuido
     private InterfaceObtenerValores obj;
     
-    public void actualizar() throws RemoteException{
+    public void actualizar() throws RemoteException, InterruptedException{
         while(true){
             
             numeroHormigasObrerasExterior.setText(String.valueOf(obj.getHormigasObrerasExterior()));
@@ -20,6 +21,18 @@ public class InterfazParte2 extends javax.swing.JFrame {
             numeroHormigasSoldadoInvasion.setText(String.valueOf(obj.getHormigasSoldadoInvasion()));
             numeroHormigasCriaZonaComer.setText(String.valueOf(obj.getHormigasCriaZonaParaComer()));
             numeroHormigasCriaRefugio.setText(String.valueOf(obj.getHormigasCriaRefugio()));
+            
+            sleep(250);
+        }
+    }
+    
+    public void enviarAmenaza(){
+        try {
+            if(!obj.getAmenaza()){
+                obj.enviarAmenaza();
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(InterfazParte2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -28,7 +41,6 @@ public class InterfazParte2 extends javax.swing.JFrame {
      */
     public InterfazParte2() {
         initComponents();
-        jLabelAmenaza.setText("No hay amenaza");
         
         try{
             obj = (InterfaceObtenerValores) Naming.lookup("//127.0.0.1/VistaNumeroHormigas");
@@ -39,7 +51,7 @@ public class InterfazParte2 extends javax.swing.JFrame {
                 public void run(){
                     try {
                         actualizar();
-                    } catch (RemoteException ex) {
+                    } catch (RemoteException | InterruptedException ex) {
                         Logger.getLogger(InterfazParte2.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -77,7 +89,6 @@ public class InterfazParte2 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         numeroHormigasCriaRefugio = new javax.swing.JTextField();
         botonAmenaza = new javax.swing.JButton();
-        jLabelAmenaza = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,9 +130,11 @@ public class InterfazParte2 extends javax.swing.JFrame {
 
         botonAmenaza.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         botonAmenaza.setText("Generar Amenaza Insecto Invasor");
-
-        jLabelAmenaza.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelAmenaza.setText("Amenaza");
+        botonAmenaza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAmenazaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,10 +143,7 @@ public class InterfazParte2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelAmenaza)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonAmenaza))
+                    .addComponent(botonAmenaza)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
@@ -189,14 +199,16 @@ public class InterfazParte2 extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(numeroHormigasCriaRefugio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAmenaza)
-                    .addComponent(jLabelAmenaza))
+                .addComponent(botonAmenaza)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonAmenazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAmenazaActionPerformed
+        enviarAmenaza();
+    }//GEN-LAST:event_botonAmenazaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,7 +253,6 @@ public class InterfazParte2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabelAmenaza;
     private javax.swing.JTextField numeroHormigasCriaRefugio;
     private javax.swing.JTextField numeroHormigasCriaZonaComer;
     private javax.swing.JTextField numeroHormigasObrerasExterior;
