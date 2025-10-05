@@ -1,4 +1,4 @@
-# Simulación de una colonia de hormigas (PECL-PA)
+# Simulación de una colonia de hormigas
 
 Este repositorio contiene una práctica Java que simula el comportamiento de una colonia de hormigas con hilos, sincronización y una interfaz gráfica. Además incluye una parte distribuida (`RMI`) para exponer métricas en una segunda interfaz cliente.
 
